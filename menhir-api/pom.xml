@@ -7,4 +7,33 @@
   </parent>
   <artifactId>menhir-api</artifactId>
   <name>Menhir API (Representations)</name>
+  <build>
+  	<plugins>
+  	  <plugin>
+  	  	<groupId>org.assertj</groupId>
+  	  	<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+  	  	<version>1.1.0</version>
+  	  	<executions>
+  	  		<execution>
+  	  			<goals>
+  	  				<goal>generate-assertions</goal>
+  	  			</goals>
+  	  		</execution>
+  	  	</executions>
+  	  	<configuration>
+  	  		<packages>
+  	  			<param>net.menhir_it.plist</param>
+  	  		</packages>
+  	  		<targetDir>${project.build.directory}/generated-test-sources/assertions</targetDir>
+  	  	</configuration>
+  	  </plugin>
+  	</plugins>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.assertj</groupId>
+  	  	<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+  	  	<version>1.1.0</version>
+  	</dependency>
+  </dependencies>
 </project>

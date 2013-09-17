@@ -33,16 +33,18 @@ import com.google.common.base.Objects;
 public class Property<T> {
     private final String key;
     private T value;
+    private Class<T> valueType;
     private EnumSet<PropertyOptions> propertyOptions;
     
-    public Property(String key, T value, EnumSet<PropertyOptions> propertyOptions) {
+    public Property(String key, T value, Class<T> valueType, EnumSet<PropertyOptions> propertyOptions) {
         this.key = checkNotNull(key);
         this.value = value;
+        this.valueType = valueType;
         this.propertyOptions = checkNotNull(propertyOptions);
     }
     
-    public Property(String key, T value) {
-        this(key, value, DEFAULT_OPTIONS);
+    public Property(String key, T value, Class<T> valueType) {
+        this(key, value, valueType, DEFAULT_OPTIONS);
     }
     
     public String getKey() {
@@ -54,13 +56,17 @@ public class Property<T> {
     }
     
     public void setValue(T value) {
-        if (propertyOptions.contains(READ_WRITE)) {
+        if (propertyOptions.contains(CAN_WRITE)) {
             this.value = value;
         }
     }
     
     public EnumSet<PropertyOptions> getPropertyOptions() {
         return propertyOptions.clone();
+    }
+    
+    public Class<T> getValueType() {
+        return valueType;
     }
 
     /* (non-Javadoc)
@@ -82,10 +88,11 @@ public class Property<T> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Property<T> other = (Property<T>) obj;
+        Property<?> other = (Property<?>) obj;
         
         return Objects.equal(key, other.key)
                 && Objects.equal(value, other.value)
+                && Objects.equal(valueType, other.valueType)
                 && Objects.equal(propertyOptions, other.propertyOptions);
     }
 
@@ -97,6 +104,7 @@ public class Property<T> {
         return Objects.toStringHelper(this)
                 .add("key", key)
                 .add("value", value)
+                .add("valueType", valueType)
                 .add("options", propertyOptions)
                 .toString();
     }

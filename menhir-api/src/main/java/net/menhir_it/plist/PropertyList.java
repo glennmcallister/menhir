@@ -34,4 +34,5 @@ public interface PropertyList {
     public void add(String key, double value);
     public void add(String key, String value);
     public void add(String key, Property<?> value);
+    public Property<?> get(String key);
 }

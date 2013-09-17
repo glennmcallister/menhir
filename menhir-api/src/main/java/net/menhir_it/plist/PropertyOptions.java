@@ -23,10 +23,10 @@ import java.util.EnumSet;
  *
  */
 public enum PropertyOptions {
-    READ_WRITE,
+    CAN_WRITE,
     CAN_DELETE,
     CAN_ENNUMERATE;
     
     public static final EnumSet<PropertyOptions> DEFAULT_OPTIONS = 
-            EnumSet.of(READ_WRITE, CAN_DELETE, CAN_ENNUMERATE);
+            EnumSet.of(CAN_WRITE, CAN_DELETE, CAN_ENNUMERATE);
 }
