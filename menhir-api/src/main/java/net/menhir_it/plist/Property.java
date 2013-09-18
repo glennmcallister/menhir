@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.EnumSet;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**
@@ -31,12 +32,22 @@ import com.google.common.base.Objects;
  * @param <T>
  */
 public class Property<T> {
+    @JsonProperty
     private final String key;
+    
+    @JsonProperty
     private T value;
+    
+    @JsonProperty("type")
     private Class<T> valueType;
+    
+    @JsonProperty("options")
     private EnumSet<PropertyOptions> propertyOptions;
     
-    public Property(String key, T value, Class<T> valueType, EnumSet<PropertyOptions> propertyOptions) {
+    public Property(@JsonProperty("key") String key,
+            @JsonProperty("value") T value, 
+            @JsonProperty("type") Class<T> valueType, 
+            @JsonProperty("options") EnumSet<PropertyOptions> propertyOptions) {
         this.key = checkNotNull(key);
         this.value = value;
         this.valueType = valueType;

@@ -1,0 +1,10 @@
+{
+	"key" : "key1",
+	"value" : true,
+	"type" : "java.lang.Boolean",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+}

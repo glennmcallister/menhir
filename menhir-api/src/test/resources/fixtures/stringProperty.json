@@ -1,0 +1,10 @@
+{
+	"key" : "key1",
+	"value" : "yadda",
+	"type" : "java.lang.String",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+}
