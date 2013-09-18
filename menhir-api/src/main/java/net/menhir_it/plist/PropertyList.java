@@ -16,6 +16,8 @@
 
 package net.menhir_it.plist;
 
+import java.util.Iterator;
+
 
 /**
  * Unordered list of Property instances; acts more like a dictionary than
@@ -35,4 +37,6 @@ public interface PropertyList {
     public void add(String key, String value);
     public void add(String key, Property<?> value);
     public Property<?> get(String key);
+    public Iterator<Property<?>> iterator();
+    public Property<?> remove(String key);
 }

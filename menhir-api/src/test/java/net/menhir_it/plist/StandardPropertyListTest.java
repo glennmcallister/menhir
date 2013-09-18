@@ -1,6 +1,9 @@
 package net.menhir_it.plist;
 
 import static net.menhir_it.plist.PropertyAssert.assertThat;
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.EnumSet;
 
 import org.junit.After;
 import org.junit.Test;
@@ -75,5 +78,70 @@ public class StandardPropertyListTest {
         final Property<?> p = plist.get("key");
         
         assertThat(p).hasKey("key").hasValue(100).hasValueType(Integer.class);
+    }
+    
+    @Test
+    public final void testIterateProperty() {
+        plist.add("key1", 1);
+        plist.add("key2", 2);
+        
+        Property<Integer> p1 = new Property<>("key1", 1, Integer.class);
+        Property<Integer> p2 = new Property<>("key2", 2, Integer.class);
+        
+        assertThat(plist.iterator())
+            .hasSize(2)
+            .containsOnly(p1, p2);
+    }
+    
+    @Test
+    public final void testEmptyIterator() {
+        assertThat(plist.iterator())
+            .isEmpty();
+    }
+    
+    @Test
+    public final void testDoNotIterateProperty() {
+        Property<Integer> p1 = new Property<>("key1", 1, Integer.class, 
+                EnumSet.of(PropertyOptions.CAN_DELETE, PropertyOptions.CAN_WRITE));
+        Property<Integer> p2 = new Property<>("key2", 2, Integer.class);
+        
+        plist.add(p1.getKey(), p1);
+        plist.add(p2.getKey(), p2);
+        
+        assertThat(plist.iterator())
+            .hasSize(1)
+            .containsOnly(p2);
+    }
+    
+    @Test
+    public final void testCanDeleteProperty() {
+        plist.add("key1", 1);
+        plist.add("key2", 2);
+        
+        Property<?> p1 = plist.remove("key1");
+        
+        assertThat(plist.iterator())
+            .hasSize(1)
+            .containsOnly(new Property<>("key2", 2, Integer.class));
+        
+        assertThat(p1).hasKey("key1").hasValue(1);
+    }
+    
+    @Test
+    public final void testCannotDeleteProperty() {
+        Property<Integer> p1 = new Property<>("key1", 1, Integer.class, 
+                EnumSet.of(PropertyOptions.CAN_ENUMERATE));
+        Property<Integer> p2 = new Property<>("key2", 2, Integer.class);
+        
+        plist.add(p1.getKey(), p1);
+        plist.add(p2.getKey(), p2);
+        
+        Property<?> removed = plist.remove("key1");
+        
+        assertThat(plist.iterator())
+            .hasSize(2)
+            .containsOnly(p1, p2);
+        
+        assertThat(removed).isNull();
     }
 }

@@ -18,8 +18,14 @@ package net.menhir_it.plist;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 /**
  * Simple implementation of a PropertyList.
@@ -98,6 +104,30 @@ public class StandardPropertyList implements PropertyList {
     @Override
     public Property<? extends Object> get(String key) {
         return properties.get(key);
+    }
+
+    @Override
+    public Iterator<Property<?>> iterator() {
+        return Iterators.filter(properties.values().iterator(),
+                new Predicate<Property<?>>() {
+
+                    @Override
+                    public boolean apply(@Nullable Property<?> input) {
+                        return input.getPropertyOptions().contains(PropertyOptions.CAN_ENUMERATE);
+                    }
+                });
+    }
+
+    @Override
+    public Property<?> remove(String key) {
+        Property<?> candidate = properties.get(key);
+        
+        if (candidate != null &&
+            candidate.getPropertyOptions().contains(PropertyOptions.CAN_DELETE)) {
+            return properties.remove(key);
+        }
+        
+        return null;
     }
 
 }
