@@ -19,14 +19,38 @@ package net.menhir_it.plist;
 import java.util.EnumSet;
 
 /**
+ * PropertyOptions describe how a Property can be used.
+ * 
  * @author gmcallister
  *
  */
 public enum PropertyOptions {
+    /**
+     * The {@code CAN_WRITE} option allows the value of a {@link Property} 
+     * to be modified after it is created. Without this option, a Property is 
+     * read-only.
+     */
     CAN_WRITE,
-    CAN_DELETE,
-    CAN_ENNUMERATE;
     
+    /**
+     * The {@code CAN_DELETE} option allows a {@link Property} to be removed 
+     * from a {@link PropertyList}. Without this option, once a Property has 
+     * been added to a list, it cannot be removed from that list.
+     */
+    CAN_DELETE,
+    
+    /**
+     * The {@code CAN_ENNUMERATE} option allows a {@link Property} that is 
+     * part of a {@link PropertyList} to be enumerated. Without this option, if 
+     * a Property is in a list, it will be skipped over in an iterator.
+     */
+    CAN_ENUMERATE;
+    
+    /**
+     * This {@link EnumSet} provides the default set of options that a 
+     * Property will have unless otherwise provided by the {@link Property}
+     * creator.
+     */
     public static final EnumSet<PropertyOptions> DEFAULT_OPTIONS = 
-            EnumSet.of(CAN_WRITE, CAN_DELETE, CAN_ENNUMERATE);
+            EnumSet.of(CAN_WRITE, CAN_DELETE, CAN_ENUMERATE);
 }

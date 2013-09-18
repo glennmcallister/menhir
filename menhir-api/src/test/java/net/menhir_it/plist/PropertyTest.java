@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PropertyTest {
     private static final PropertyOptions DEFAULT_PROPERTY_OPTIONS[] = {
         PropertyOptions.CAN_DELETE,
-        PropertyOptions.CAN_ENNUMERATE,
+        PropertyOptions.CAN_ENUMERATE,
         PropertyOptions.CAN_WRITE
     };
 
