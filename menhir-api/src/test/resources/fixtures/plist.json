@@ -1,0 +1,62 @@
+{ "plist" : {
+"keyBoolean" : {
+	"key" : "keyBoolean",
+	"value" : true,
+	"type" : "java.lang.Boolean",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+},
+"keyDouble" : {
+	"key" : "keyDouble",
+	"value" : 1.0,
+	"type" : "java.lang.Double",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+},
+"keyFloat" : {
+	"key" : "keyFloat",
+	"value" : 1.0,
+	"type" : "java.lang.Float",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+},
+"keyInteger" : {
+	"key" : "keyInteger",
+	"value" : 1,
+	"type" : "java.lang.Integer",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+},
+"keyLong" : {
+	"key" : "keyLong",
+	"value" : 1,
+	"type" : "java.lang.Long",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+},
+"keyString" : {
+	"key" : "keyString",
+	"value" : "yadda",
+	"type" : "java.lang.String",
+	"options" : [
+		"CAN_WRITE",
+		"CAN_DELETE",
+		"CAN_ENUMERATE"
+	]
+}
+} }

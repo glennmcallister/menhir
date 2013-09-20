@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.EnumSet;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.common.base.Objects;
 
 /**
@@ -31,6 +32,7 @@ import com.google.common.base.Objects;
  *
  * @param <T>
  */
+@JsonPropertyOrder({"key", "value", "type", "options"})
 public class Property<T> {
     @JsonProperty
     private final String key;
@@ -116,6 +118,7 @@ public class Property<T> {
                 .add("key", key)
                 .add("value", value)
                 .add("valueType", valueType)
+                .add("actualValueType", value.getClass().toString())
                 .add("options", propertyOptions)
                 .toString();
     }

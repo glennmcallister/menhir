@@ -16,9 +16,9 @@
 
 package net.menhir_it;
 
-import com.yammer.dropwizard.Service;
-import com.yammer.dropwizard.config.Bootstrap;
-import com.yammer.dropwizard.config.Environment;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
 /**
  * The core Menhir service, which ties all the issue tracker capabilities
@@ -27,35 +27,21 @@ import com.yammer.dropwizard.config.Environment;
  * @author gmcallister
  * 
  */
-public class MenhirService extends Service<MenhirConfiguration> {
+public class MenhirService extends Application<MenhirConfiguration> {
 
     public static void main(String[] args) throws Exception {
         new MenhirService().run(args);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yammer.dropwizard.Service#initialize(com.yammer.dropwizard.config
-     * .Bootstrap)
-     */
     @Override
     public void initialize(Bootstrap<MenhirConfiguration> bootstrap) {
-        bootstrap.setName("menhir");
+        // TODO Auto-generated method stub        
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.yammer.dropwizard.Service#run(com.yammer.dropwizard.config.Configuration
-     * , com.yammer.dropwizard.config.Environment)
-     */
     @Override
     public void run(MenhirConfiguration configuration, Environment environment)
             throws Exception {
         // TODO Auto-generated method stub
-
     }
+
 }

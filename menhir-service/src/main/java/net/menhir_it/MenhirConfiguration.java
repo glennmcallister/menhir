@@ -15,7 +15,7 @@
  */
 package net.menhir_it;
 
-import com.yammer.dropwizard.config.Configuration;
+import io.dropwizard.Configuration;
 
 /**
  * Environment specific configuration for the Menhir service.

@@ -18,14 +18,20 @@ package net.menhir_it.plist;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterators;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Function;
+import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Ordering;
+
 
 /**
  * Simple implementation of a PropertyList.
@@ -33,8 +39,9 @@ import javax.annotation.Nullable;
  * @author gmcallister
  *
  */
-public class StandardPropertyList implements PropertyList {
-    private Map<String, Property<? extends Object>> properties = new LinkedHashMap<>();
+public class StandardPropertyList implements PropertyList, Iterable<Property<?>> {
+    @JsonProperty("plist")
+    private final Map<String, Property<?>> properties = new TreeMap<String, Property<?>>();
 
     /* (non-Javadoc)
      * @see net.menhir_it.plist.PropertyList#add(java.lang.String, boolean)
@@ -130,4 +137,37 @@ public class StandardPropertyList implements PropertyList {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(properties);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        StandardPropertyList other = (StandardPropertyList) obj;
+        
+        return Objects.equal(properties, other.properties);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(StandardPropertyList.class)
+                .add("properties", properties)
+                .toString();
+    }
 }
