@@ -1,7 +1,7 @@
 {
 	"key" : "key1",
 	"value" : 10.0,
-	"type" : "java.lang.Double",
+	"type" : "Double",
 	"options" : [
 		"CAN_WRITE",
 		"CAN_DELETE",

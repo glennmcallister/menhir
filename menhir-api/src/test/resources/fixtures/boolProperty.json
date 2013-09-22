@@ -1,7 +1,7 @@
 {
 	"key" : "key1",
 	"value" : true,
-	"type" : "java.lang.Boolean",
+	"type" : "Boolean",
 	"options" : [
 		"CAN_WRITE",
 		"CAN_DELETE",

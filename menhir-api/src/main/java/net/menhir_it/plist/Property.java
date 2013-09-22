@@ -23,10 +23,12 @@ import static net.menhir_it.plist.PropertyOptions.DEFAULT_OPTIONS;
 import java.util.EnumSet;
 
 import net.menhir_it.plist.ser.PropertyDeserializer;
+import net.menhir_it.plist.ser.PropertyTypeSerializer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Objects;
 
 
@@ -47,6 +49,7 @@ public class Property<T> {
     private T value;
     
     @JsonProperty("type")
+    @JsonSerialize(using=PropertyTypeSerializer.class)
     private Class<T> valueType;
     
     @JsonProperty("options")

@@ -36,32 +36,32 @@ public class PropertyDeserializer extends JsonDeserializer<Property<?>> {
         // This is where life gets annoying...
         String clazz = object.get("type").asText();
         switch (clazz) {
-            case "java.lang.Integer" : {
+            case "Integer" : {
                 int val = object.get("value").asInt();
                 prop = new Property<Integer>(key, val, Integer.class, options);
                 break;
             }
-            case "java.lang.Long" : {
+            case "Long" : {
                 long val = object.get("value").asLong();
                 prop = new Property<Long>(key, val, Long.class, options);
                 break;
             }
-            case "java.lang.Float" : {
+            case "Float" : {
                 float val = object.get("value").floatValue();
                 prop = new Property<Float>(key, val, Float.class, options);
                 break;
             }
-            case "java.lang.Double" : {
+            case "Double" : {
                 double val = object.get("value").asDouble();
                 prop = new Property<Double>(key, val, Double.class, options);
                 break;
             }
-            case "java.lang.Boolean" : {
+            case "Boolean" : {
                 boolean val = object.get("value").asBoolean();
                 prop = new Property<Boolean>(key, val, Boolean.class, options);
                 break;
             }
-            case "java.lang.String" : {
+            case "String" : {
                 String val = object.get("value").asText();
                 prop = new Property<String>(key, val, String.class, options);
                 break;

@@ -1,7 +1,7 @@
 {
 	"key" : "key1",
 	"value" : true,
-	"type" : "java.lang.DoesntExist",
+	"type" : "DoesntExist",
 	"options" : [
 		"CAN_WRITE",
 		"CAN_DELETE",
