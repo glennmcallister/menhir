@@ -16,14 +16,19 @@
 
 package net.menhir_it.plist;
 
-import static net.menhir_it.plist.PropertyOptions.*;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static net.menhir_it.plist.PropertyOptions.CAN_WRITE;
+import static net.menhir_it.plist.PropertyOptions.DEFAULT_OPTIONS;
 
 import java.util.EnumSet;
 
+import net.menhir_it.plist.ser.PropertyDeserializer;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
+
 
 /**
  * A generic property type.
@@ -33,6 +38,7 @@ import com.google.common.base.Objects;
  * @param <T>
  */
 @JsonPropertyOrder({"key", "value", "type", "options"})
+@JsonDeserialize(using=PropertyDeserializer.class)
 public class Property<T> {
     @JsonProperty
     private final String key;
@@ -48,11 +54,11 @@ public class Property<T> {
     
     public Property(@JsonProperty("key") String key,
             @JsonProperty("value") T value, 
-            @JsonProperty("type") Class<T> valueType, 
+            @JsonProperty("type") Class<T> valueType,
             @JsonProperty("options") EnumSet<PropertyOptions> propertyOptions) {
         this.key = checkNotNull(key);
-        this.value = value;
-        this.valueType = valueType;
+        this.value = checkNotNull(value);
+        this.valueType = checkNotNull(valueType);
         this.propertyOptions = checkNotNull(propertyOptions);
     }
     

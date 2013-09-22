@@ -1,14 +1,12 @@
 package net.menhir_it.plist;
 
 import static io.dropwizard.testing.FixtureHelpers.fixture;
+import static org.assertj.core.api.Assertions.assertThat;
 import io.dropwizard.jackson.Jackson;
-
-import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,7 +17,7 @@ public class StandardPropertyListSerializationTest {
     public final void setup() {
         mapper = Jackson.newObjectMapper();
     }
-    
+        
     @Test
     public final void propertyListProducesTheExpectedJson() throws Exception {
         PropertyList plist = new StandardPropertyList();
@@ -28,20 +26,17 @@ public class StandardPropertyListSerializationTest {
         plist.add("keyFloat", 1.0f);
         plist.add("keyInteger", 1);
         plist.add("keyLong", 1L);
-        plist.add("keyString", "yadda");
-        
+        plist.add("keyString", "yadda");        
         
         String jsonStr = mapper.writeValueAsString(plist);
         String fixtureStr = mapper.writeValueAsString(
                 mapper.readValue(
                         fixture("fixtures/plist.json"), JsonNode.class)
                         );
-         
-        
+                 
         assertThat(jsonStr).isEqualTo(fixtureStr);
-    }
+    }    
     
-    /*
     @Test
     public final void propertyListConsumesTheExpectedJson() throws Exception {
         StandardPropertyList plist = new StandardPropertyList();
@@ -51,16 +46,11 @@ public class StandardPropertyListSerializationTest {
         plist.add("keyInteger", 1);
         plist.add("keyLong", 1L);
         plist.add("keyString", "yadda");
-        
-        StandardPropertyList fromJsonList = fromJson(jsonFixture("fixtures/plist.json"), 
-                StandardPropertyList.class);
-        
-        String plistStr = plist.toString();
-        String fromJsonListStr = fromJsonList.toString();
+                
+        StandardPropertyList fromJsonList = mapper.readValue(
+                fixture("fixtures/plist.json"), StandardPropertyList.class);
         
         assertThat(fromJsonList).containsAll(plist);
-        //assertThat(plistStr).isEqualTo(fromJsonListStr);                            
     }
-    */
-
+    
 }
